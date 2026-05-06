@@ -296,7 +296,7 @@ if st.session_state.get("response_result"):
                 color:rgba(245,240,235,0.85);line-height:1.65;">
         {summary[:500]}
     </div>
-    {f'<div style="margin-top:8px;font-size:0.75rem;color:rgba(245,240,235,0.4);">Confidence: {confidence} | Rationale: {rationale[:100]}</div>' if rationale else ''}
+    {(f'<div style="margin-top:8px;font-size:0.75rem;color:rgba(245,240,235,0.4);">Confidence: {confidence} | Rationale: {rationale[:100]}</div>') if rationale else ''}
 </div>
 """, height=max(120, len(summary[:500])//4 + 80))
 
@@ -387,7 +387,7 @@ if st.session_state.get("response_result"):
 <div style="background:#120f0a;border:1px solid rgba(239,68,68,0.12);
             border-radius:8px;padding:0.9rem 1rem;">
     {reg_html}
-    {f'<div style="margin-top:8px;font-family:DM Sans,sans-serif;font-size:0.75rem;color:rgba(245,240,235,0.45);line-height:1.5;">{not_sum[:200]}</div>' if not_sum else ''}
+    {(f'<div style="margin-top:8px;font-family:DM Sans,sans-serif;font-size:0.75rem;color:rgba(245,240,235,0.45);line-height:1.5;">{not_sum[:200]}</div>') if not_sum else ''}
 </div>
 """, height=230)
 
@@ -534,13 +534,13 @@ if st.session_state.get("response_result"):
                         font-size:0.83rem;color:#f5f0eb;margin-bottom:2px;">
                 {s_action}
             </div>
-            {f'<div style="font-size:0.77rem;color:rgba(245,240,235,0.55);margin-bottom:3px;">{s_detail[:150]}</div>' if s_detail else ''}
+            {(f'<div style="font-size:0.77rem;color:rgba(245,240,235,0.55);margin-bottom:3px;">{s_detail[:150]}</div>') if s_detail else ''}
             <div style="display:flex;gap:8px;font-size:0.68rem;
                         color:rgba(245,240,235,0.35);flex-wrap:wrap;">
-                {f'<span>Owner: {s_owner}</span>' if s_owner else ''}
-                {f'<span>⏱ {s_time}</span>' if s_time else ''}
+                {(f'<span>Owner: {s_owner}</span>') if s_owner else ''}
+                {(f'<span>⏱ {s_time}</span>') if s_time else ''}
             </div>
-            {f'<div style="margin-top:4px;">{tools_html}</div>' if tools_html else ''}
+            {(f'<div style="margin-top:4px;">{tools_html}</div>') if tools_html else ''}
         </div>
     </div>
 </div>"""
@@ -628,7 +628,7 @@ if st.session_state.get("response_result"):
     <div style="font-size:0.78rem;color:rgba(245,240,235,0.6);margin-bottom:3px;">
         {d_crit[:150]}
     </div>
-    {f'<div style="font-size:0.7rem;color:rgba(245,240,235,0.35);">Owner: {d_own}</div>' if d_own else ''}
+    {(f'<div style="font-size:0.7rem;color:rgba(245,240,235,0.35);">Owner: {d_own}</div>') if d_own else ''}
 </div>
 """, height=95)
 
@@ -736,8 +736,8 @@ if st.session_state.get("response_result"):
         <span style="color:{r_color};font-weight:700;">{s_num}.</span>
         {s_action}
     </div>
-    {f'<div style="background:#050402;border:1px solid rgba(34,197,94,0.2);border-radius:4px;padding:5px 8px;font-family:JetBrains Mono,monospace;font-size:0.75rem;color:#22c55e;margin:3px 0;">$ {s_cmd}</div>' if s_cmd else ''}
-    {f'<div style="font-size:0.7rem;color:rgba(245,240,235,0.35);font-family:JetBrains Mono,monospace;">Expected: {s_exp[:80]}</div>' if s_exp else ''}
+    {(f'<div style="background:#050402;border:1px solid rgba(34,197,94,0.2);border-radius:4px;padding:5px 8px;font-family:JetBrains Mono,monospace;font-size:0.75rem;color:#22c55e;margin:3px 0;">$ {s_cmd}</div>') if s_cmd else ''}
+    {(f'<div style="font-size:0.7rem;color:rgba(245,240,235,0.35);font-family:JetBrains Mono,monospace;">Expected: {s_exp[:80]}</div>') if s_exp else ''}
 </div>"""
 
                 # Verification
@@ -753,7 +753,7 @@ if st.session_state.get("response_result"):
                 color:#0891b2;margin-bottom:2px;">VERIFY:</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:0.73rem;
                 color:#0891b2;">$ {v_cmd}</div>
-    {f'<div style="font-size:0.68rem;color:rgba(245,240,235,0.4);">Expected: {v_exp[:80]}</div>' if v_exp else ''}
+    {(f'<div style="font-size:0.68rem;color:rgba(245,240,235,0.4);">Expected: {v_exp[:80]}</div>') if v_exp else ''}
 </div>"""
 
                 est_height = max(150, len(r_steps[:6]) * 80 + 80)
@@ -762,8 +762,8 @@ if st.session_state.get("response_result"):
                     f"{r_pri} — {r_id} | {r_title} | ⏱ {r_eff}",
                     expanded=(r_pri == "P1")
                 ):
-                    components.html(f"""
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+                    components.html(
+                        f"""<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <div style="background:#120f0a;border:1px solid {r_color}22;
             border-top:2px solid {r_color};border-radius:8px;padding:1rem;">
 
@@ -773,18 +773,19 @@ if st.session_state.get("response_result"):
             {r_pri}
         </span>
         <span style="font-size:0.78rem;color:rgba(245,240,235,0.5);">
-            ⏱ Effort: {r_eff}
+            Effort: {r_eff}
         </span>
     </div>
 
-    {f'<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:4px;padding:6px 8px;margin-bottom:8px;font-size:0.78rem;color:rgba(245,240,235,0.65);"><strong style=\'color:#ef4444;\'>Risk if ignored:</strong> {r_risk[:150]}</div>' if r_risk else ''}
+    {(f'<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:4px;padding:6px 8px;margin-bottom:8px;font-size:0.78rem;color:rgba(245,240,235,0.65);"><strong style="color:#ef4444;">Risk if ignored:</strong> {r_risk[:150]}</div>') if r_risk else ''}
 
     {steps_html}
     {verif_html}
 
-    {f'<div style="margin-top:8px;font-size:0.72rem;color:rgba(245,240,235,0.35);font-family:JetBrains Mono,monospace;">Rollback: {r_roll[:100]}</div>' if r_roll else ''}
-</div>
-""", height=est_height)
+    {(f'<div style="margin-top:8px;font-size:0.72rem;color:rgba(245,240,235,0.35);font-family:JetBrains Mono,monospace;">Rollback: {r_roll[:100]}</div>') if r_roll else ''}
+</div>""",
+                        height=est_height
+                    )
         else:
             # Raw output fallback
             rem_raw = remediation.get("raw_output", "")
@@ -828,7 +829,7 @@ if st.session_state.get("response_result"):
             padding:0.6rem 0.8rem;margin-bottom:0.4rem;">
     <div style="font-family:'DM Sans',sans-serif;font-size:0.8rem;
                 color:#f5f0eb;margin-bottom:2px;">👁 {m_rule}</div>
-    {f'<div style="font-size:0.72rem;color:rgba(245,240,235,0.45);">{m_impl[:100]}</div>' if m_impl else ''}
+    {(f'<div style="font-size:0.72rem;color:rgba(245,240,235,0.45);">{m_impl[:100]}</div>') if m_impl else ''}
 </div>
 """, height=70)
 
